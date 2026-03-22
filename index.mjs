@@ -4,6 +4,8 @@ import fs from 'fs';
 import corsPassThru from './cors/index.mjs';
 import radarPassThru from './cors/radar.mjs';
 import outlookPassThru from './cors/outlook.mjs';
+import rssFeedPassThru from './cors/rss.mjs';
+import calendarFeedPassThru from './cors/calendar.mjs';
 import playlist from './src/playlist.mjs';
 import OVERRIDES from './src/overrides.mjs';
 
@@ -17,6 +19,8 @@ app.set('view engine', 'ejs');
 app.get('/stations/*station', corsPassThru);
 app.get('/Conus/*radar', radarPassThru);
 app.get('/products/*product', outlookPassThru);
+app.get('/rss-feed', rssFeedPassThru);
+app.get('/calendar-feed', calendarFeedPassThru);
 app.get('/playlist.json', playlist);
 
 // version

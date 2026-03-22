@@ -50,6 +50,8 @@
   <script type="module" src="scripts/modules/radar.mjs"></script>
   <script type="module" src="scripts/modules/regionalforecast.mjs"></script>
   <script type="module" src="scripts/modules/travelforecast.mjs"></script>
+  <script type="module" src="scripts/modules/rss-feed.mjs"></script>
+  <script type="module" src="scripts/modules/calendar.mjs"></script>
   <script type="module" src="scripts/modules/progress.mjs"></script>
   <script type="module" src="scripts/modules/radar.mjs"></script>
   <script type="module" src="scripts/modules/settings.mjs"></script>
@@ -128,6 +130,12 @@
       </div>
       <div id="hazards-html" class="weather-display">
         <%- include('partials/hazards.ejs') %>
+      </div>
+      <div id="rss-feed-html" class="weather-display">
+        <%- include('partials/rss-feed.ejs') %>
+      </div>
+      <div id="calendar-html" class="weather-display">
+        <%- include('partials/calendar.ejs') %>
       </div>
     </div>
     <div id="divTwcBottom">

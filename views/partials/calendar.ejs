@@ -1,0 +1,16 @@
+<%- include('header.ejs', {title: 'Calendar', hasTime: true}) %>
+<div class="main has-scroll calendar">
+	<div class="column-headers">
+		<div class="cal-date">DATE</div>
+		<div class="cal-time">TIME</div>
+		<div class="cal-title">EVENT</div>
+	</div>
+	<div class="cal-events">
+		<div class="cal-event template">
+			<div class="cal-date"></div>
+			<div class="cal-time"></div>
+			<div class="cal-title"></div>
+		</div>
+	</div>
+</div>
+<%- include('scroll.ejs') %>

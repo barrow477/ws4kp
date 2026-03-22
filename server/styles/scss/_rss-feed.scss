@@ -1,0 +1,44 @@
+@use 'shared/_colors'as c;
+@use 'shared/_utils'as u;
+
+#rss-feed-html.weather-display {
+	background-image: url('../images/backgrounds/1.png');
+}
+
+.weather-display .main.rss-feed {
+	overflow-y: hidden;
+
+	.rss-items {
+		min-height: 310px;
+		padding: 6px 30px;
+
+		.rss-item {
+			@include u.text-shadow(3px, 1.5px);
+			padding: 8px 0 6px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+			.rss-title {
+				font-family: 'Star4000';
+				font-size: 18pt;
+				color: c.$title-color;
+				text-transform: uppercase;
+				line-height: 1.1;
+			}
+
+			.rss-date {
+				font-family: 'Star4000 Small';
+				font-size: 14pt;
+				color: #c0d0ff;
+				margin-top: 2px;
+			}
+
+			.rss-desc {
+				font-family: 'Star4000 Small';
+				font-size: 13pt;
+				color: #c0c0c0;
+				margin-top: 2px;
+				line-height: 1.2;
+			}
+		}
+	}
+}

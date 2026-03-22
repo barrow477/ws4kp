@@ -1,0 +1,56 @@
+@use 'shared/_colors'as c;
+@use 'shared/_utils'as u;
+
+#calendar-html.weather-display {
+	background-image: url('../images/backgrounds/3.png');
+}
+
+.weather-display .main.calendar {
+	@include u.text-shadow(3px, 1.5px);
+	overflow-y: hidden;
+
+	.column-headers {
+		display: flex;
+		font-family: 'Star4000';
+		font-size: 18pt;
+		color: c.$column-header-text;
+		background-color: c.$column-header;
+		padding: 4px 20px;
+		margin-top: 4px;
+
+		.cal-date { width: 170px; }
+		.cal-time { width: 120px; }
+		.cal-title { flex: 1; }
+	}
+
+	.cal-events {
+		padding: 0 20px;
+
+		.cal-event {
+			display: flex;
+			font-family: 'Star4000 Small';
+			font-size: 18pt;
+			color: white;
+			padding: 3px 0;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+			.cal-date {
+				width: 170px;
+				color: c.$title-color;
+				font-family: 'Star4000 Small';
+			}
+
+			.cal-time {
+				width: 120px;
+			}
+
+			.cal-title {
+				flex: 1;
+				text-transform: uppercase;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		}
+	}
+}

@@ -12,6 +12,8 @@
 @use 'regional-forecast';
 @use 'almanac';
 @use 'hazards';
+@use 'rss-feed';
+@use 'calendar';
 @use 'media';
 @use 'spc-outlook';
 @use 'shared/scanlines';
