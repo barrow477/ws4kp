@@ -9,7 +9,8 @@ const EVENTS_PER_SCREEN = 8;
 
 class CalendarDisplay extends WeatherDisplay {
 	constructor(navId, elemId) {
-		super(navId, elemId, 'Calendar', false);
+		const hasCalendar = !!parseQueryString()?.calendarUrl;
+		super(navId, elemId, 'Calendar', hasCalendar);
 		this.timing.totalScreens = 0;
 	}
 

@@ -7,7 +7,8 @@ import { parseQueryString } from './share.mjs';
 
 class RssFeed extends WeatherDisplay {
 	constructor(navId, elemId) {
-		super(navId, elemId, 'RSS Feed', false);
+		const hasRssFeed = !!parseQueryString()?.rssFeedUrl;
+		super(navId, elemId, 'RSS Feed', hasRssFeed);
 		this.showOnProgress = false;
 		this.timing.totalScreens = 0;
 	}
