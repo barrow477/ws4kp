@@ -86,9 +86,11 @@ class RssFeed extends WeatherDisplay {
 		this.finishDraw();
 	}
 
-	showCanvas() {
+	showCanvas(navCmd) {
+		// reset scroll before the element becomes visible to avoid a flash of wrong position
+		this.elem.querySelector('.main').scrollTo(0, 0);
 		this.drawCanvas();
-		super.showCanvas();
+		super.showCanvas(navCmd);
 	}
 
 	screenIndexChange() {

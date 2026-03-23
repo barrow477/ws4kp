@@ -32,9 +32,11 @@ class CalendarDisplay extends WeatherDisplay {
 			});
 			const events = parseIcal(rawIcal);
 			const now = new Date();
-			const future = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+			// use start of today so all-day events starting today are included
+			const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+			const future = new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000);
 			this.data = events
-				.filter((e) => e.start >= now && e.start <= future)
+				.filter((e) => e.start >= today && e.start <= future)
 				.sort((a, b) => a.start - b.start)
 				.slice(0, 40);
 		} catch (e) {
@@ -150,12 +152,17 @@ const parseIcalDate = (value) => {
 		const [, y, m, d] = dateOnly;
 		return new Date(+y, +m - 1, +d);
 	}
-	// DateTime: YYYYMMDDTHHMMSS[Z]
-	const dateTime = value.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(Z?)$/);
+	// DateTime: YYYYMMDDTHHMMSS[Z or ±HHMM or ±HH:MM]
+	const dateTime = value.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(Z|[+-]\d{2}:?\d{2})?$/);
 	if (dateTime) {
-		const [, y, m, d, h, min, s, utc] = dateTime;
-		if (utc === 'Z') return new Date(Date.UTC(+y, +m - 1, +d, +h, +min, +s));
-		return new Date(+y, +m - 1, +d, +h, +min, +s);
+		const [, y, m, d, h, min, s, tz] = dateTime;
+		if (!tz) return new Date(+y, +m - 1, +d, +h, +min, +s);
+		if (tz === 'Z') return new Date(Date.UTC(+y, +m - 1, +d, +h, +min, +s));
+		// handle offset like +0530, -0500, +05:30
+		const sign = tz[0] === '+' ? 1 : -1;
+		const digits = tz.slice(1).replace(':', '');
+		const offsetMs = sign * ((+digits.slice(0, 2) * 60) + +digits.slice(2, 4)) * 60000;
+		return new Date(Date.UTC(+y, +m - 1, +d, +h, +min, +s) - offsetMs);
 	}
 	return null;
 };
